@@ -1,1 +1,3 @@
-const API_KEY = "0f894b450998e03076e8ad1e9e8a91a7";
+//Crea un archivo con el nombre secrets.js y ahi coloca una variable llamada API_KEY y asignale la API KEY que te ofrece Movie DB
+
+//const API_KEY = "0ajan85ahhiTsx" <- Ejemplo
