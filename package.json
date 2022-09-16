@@ -1,0 +1,26 @@
+{
+  "name": "sitio-web-peliculas",
+  "version": "1.0.0",
+  "description": "Sitio web para pelicula usando la API de Movie DB",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iesusdavila/sitio-web-peliculas.git"
+  },
+  "keywords": [
+    "javascript",
+    "html",
+    "css",
+    "moviedb",
+    "api"
+  ],
+  "author": "Iesus Davila <iesusdavila@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iesusdavila/sitio-web-peliculas/issues"
+  },
+  "homepage": "https://github.com/iesusdavila/sitio-web-peliculas#readme"
+}
