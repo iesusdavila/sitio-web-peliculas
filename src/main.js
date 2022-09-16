@@ -9,6 +9,7 @@ async function getTrendingMoviesPreview() {
   const trendingPreview_movieList = document.querySelector(
     ".trendingPreview-movieList"
   );
+
   movies.forEach((movie) => {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
@@ -20,8 +21,37 @@ async function getTrendingMoviesPreview() {
 
     movie_container.appendChild(imageMovie);
     trendingPreview_movieList.appendChild(movie_container);
-    console.log(movie_container);
+  });
+}
+
+async function getCategoriesMovies() {
+  const res = await fetch(
+    "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
+      API_KEY +
+      "&language=en-US"
+  );
+  const data = await res.json();
+
+  const categories = data.genres;
+
+  const categoriesPreview_list = document.querySelector(
+    ".categoriesPreview-list"
+  );
+
+  categories.forEach((category) => {
+    const category_container = document.createElement("div");
+    category_container.classList.add("category_container");
+
+    const category_title = document.createElement("h3");
+    category_title.setAttribute("id", "id" + category.id);
+    category_title.classList.add("category-title");
+    category_title.innerText = category.name;
+
+    category_container.appendChild(category_title);
+    categoriesPreview_list.appendChild(category_container);
+    console.log(category_container);
   });
 }
 
 getTrendingMoviesPreview();
+getCategoriesMovies();
