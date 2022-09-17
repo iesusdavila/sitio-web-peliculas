@@ -103,3 +103,39 @@ async function getMoviesByCategory(idCtg, nameCtg) {
     genericSection.appendChild(movie_container);
   });
 }
+
+async function getMoviesBySearch(query) {
+  const { data } = await api("search/movie", {
+    params: {
+      include_adult: false,
+      query,
+    },
+  });
+
+  const movies = data.results;
+
+  genericSection.innerHTML = "";
+
+  if (movies.length) {
+    movies.forEach((movie) => {
+      const movie_container = document.createElement("div");
+      movie_container.classList.add("movie-container");
+
+      const imageMovie = document.createElement("img");
+      imageMovie.classList.add("movie-img");
+      imageMovie.alt = movie.title;
+      imageMovie.src = "https://image.tmdb.org/t/p/w300/" + movie.poster_path;
+
+      movie_container.appendChild(imageMovie);
+      genericSection.appendChild(movie_container);
+    });
+  } else {
+    const anuncio = document.createElement("p");
+    anuncio.classList.add("header-title--categoryView");
+    anuncio.innerText = "Titulo no encontrado";
+    anuncio.style.width = "100%";
+    anuncio.style.textAlign = "center";
+
+    genericSection.appendChild(anuncio);
+  }
+}

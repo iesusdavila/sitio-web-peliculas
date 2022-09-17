@@ -1,5 +1,5 @@
 searchFormBtn.addEventListener("click", () => {
-  location.hash = "#search=123";
+  location.hash = "#search=" + searchFormInput.value;
 });
 
 trendingBtn.addEventListener("click", () => {
@@ -27,6 +27,9 @@ function navigator() {
   } else {
     homePage();
   }
+
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 
 function homePage() {
@@ -36,6 +39,7 @@ function homePage() {
   arrowBtn.classList.add("inactive");
   headerTitle.classList.remove("inactive");
   searchForm.classList.remove("inactive");
+  searchFormInput.value = "";
   trendingPreviewSection.classList.remove("inactive");
   categoriesPreviewSection.classList.remove("inactive");
   genericSection.classList.add("inactive");
@@ -84,12 +88,16 @@ function searchPage() {
   arrowBtn.classList.remove("header-arrow--white");
   headerTitle.classList.add("inactive");
   headerCategoryTitle.classList.remove("inactive");
+  headerCategoryTitle.innerHTML = "Buscador";
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
+
+  const query = location.hash.split("=")[1];
+  getMoviesBySearch(query);
 }
 
 function trendsPage() {
@@ -99,6 +107,7 @@ function trendsPage() {
   arrowBtn.classList.remove("header-arrow--white");
   headerTitle.classList.add("inactive");
   headerCategoryTitle.classList.remove("inactive");
+  headerCategoryTitle.innerHTML = "Peliculas en tendencia";
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
