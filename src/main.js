@@ -23,6 +23,8 @@ async function getTrendingMoviesPreview() {
     ".trendingPreview-movieList"
   );
 
+  trendingPreview_movieList.innerHTML = "";
+
   movies.forEach((movie) => {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
@@ -51,6 +53,7 @@ async function getCategoriesMovies() {
   const categoriesPreview_list = document.querySelector(
     ".categoriesPreview-list"
   );
+  categoriesPreview_list.innerHTML = "";
 
   categories.forEach((category) => {
     const category_container = document.createElement("div");
@@ -60,6 +63,9 @@ async function getCategoriesMovies() {
     category_title.setAttribute("id", "id" + category.id);
     category_title.classList.add("category-title");
     category_title.innerText = category.name;
+    category_title.addEventListener("click", () => {
+      location.hash = `#category=${category.id}-${category.name}`;
+    });
 
     category_container.appendChild(category_title);
     categoriesPreview_list.appendChild(category_container);
@@ -68,3 +74,32 @@ async function getCategoriesMovies() {
 
 // getTrendingMoviesPreview();
 // getCategoriesMovies();
+
+async function getMoviesByCategory(idCtg, nameCtg) {
+  const { data } = await api("/discover/movie", {
+    params: {
+      sort_by: "popularity.desc",
+      include_adult: false,
+      include_video: true,
+      with_genres: idCtg,
+    },
+  });
+
+  const movies = data.results;
+
+  headerCategoryTitle.innerText = nameCtg;
+  genericSection.innerHTML = "";
+
+  movies.forEach((movie) => {
+    const movie_container = document.createElement("div");
+    movie_container.classList.add("movie-container");
+
+    const imageMovie = document.createElement("img");
+    imageMovie.classList.add("movie-img");
+    imageMovie.alt = movie.title;
+    imageMovie.src = "https://image.tmdb.org/t/p/w300/" + movie.poster_path;
+
+    movie_container.appendChild(imageMovie);
+    genericSection.appendChild(movie_container);
+  });
+}
