@@ -29,13 +29,38 @@ async function getTrendingMoviesPreview() {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
-    movie_container.addEventListener("click", () => {
-      location.hash = "#movie=" + movie.id;
-      movieDetailTitle.innerText = movie.title;
-      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
-      movieDetailDescription.innerText = movie.overview;
-      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+    movie_container.addEventListener("click", async () => {
+      const { data: dataMovie } = await api("movie/" + movie.id);
+
+      location.hash = "#movie=" + dataMovie.id;
+      movieDetailTitle.innerText = dataMovie.title;
+      movieDetailScore.innerText = parseFloat(dataMovie.vote_average).toFixed(
+        2
+      );
+      movieDetailDescription.innerText = dataMovie.overview;
+      const imgMovie =
+        "https://image.tmdb.org/t/p/w500/" + dataMovie.poster_path;
       headerSection.style.background = `url(${imgMovie})`;
+
+      const categoriesMovie = dataMovie.genres;
+
+      movieDetailCategoriesList.innerHTML = " ";
+
+      categoriesMovie.forEach((category) => {
+        const category_container = document.createElement("div");
+        category_container.classList.add("category_container");
+
+        const category_title = document.createElement("h3");
+        category_title.setAttribute("id", "id" + category.id);
+        category_title.classList.add("category-title");
+        category_title.innerText = category.name;
+        category_title.addEventListener("click", () => {
+          location.hash = `#category=${category.id}-${category.name}`;
+        });
+
+        category_container.appendChild(category_title);
+        movieDetailCategoriesList.appendChild(category_container);
+      });
     });
 
     const imageMovie = document.createElement("img");
@@ -103,13 +128,38 @@ async function getMoviesByCategory(idCtg, nameCtg) {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
-    movie_container.addEventListener("click", () => {
-      location.hash = "#movie=" + movie.id;
-      movieDetailTitle.innerText = movie.title;
-      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
-      movieDetailDescription.innerText = movie.overview;
-      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+    movie_container.addEventListener("click", async () => {
+      const { data: dataMovie } = await api("movie/" + movie.id);
+
+      location.hash = "#movie=" + dataMovie.id;
+      movieDetailTitle.innerText = dataMovie.title;
+      movieDetailScore.innerText = parseFloat(dataMovie.vote_average).toFixed(
+        2
+      );
+      movieDetailDescription.innerText = dataMovie.overview;
+      const imgMovie =
+        "https://image.tmdb.org/t/p/w500/" + dataMovie.poster_path;
       headerSection.style.background = `url(${imgMovie})`;
+
+      const categoriesMovie = dataMovie.genres;
+
+      movieDetailCategoriesList.innerHTML = " ";
+
+      categoriesMovie.forEach((category) => {
+        const category_container = document.createElement("div");
+        category_container.classList.add("category_container");
+
+        const category_title = document.createElement("h3");
+        category_title.setAttribute("id", "id" + category.id);
+        category_title.classList.add("category-title");
+        category_title.innerText = category.name;
+        category_title.addEventListener("click", () => {
+          location.hash = `#category=${category.id}-${category.name}`;
+        });
+
+        category_container.appendChild(category_title);
+        movieDetailCategoriesList.appendChild(category_container);
+      });
     });
 
     const imageMovie = document.createElement("img");
@@ -138,6 +188,40 @@ async function getMoviesBySearch(query) {
     movies.forEach((movie) => {
       const movie_container = document.createElement("div");
       movie_container.classList.add("movie-container");
+
+      movie_container.addEventListener("click", async () => {
+        const { data: dataMovie } = await api("movie/" + movie.id);
+
+        location.hash = "#movie=" + dataMovie.id;
+        movieDetailTitle.innerText = dataMovie.title;
+        movieDetailScore.innerText = parseFloat(dataMovie.vote_average).toFixed(
+          2
+        );
+        movieDetailDescription.innerText = dataMovie.overview;
+        const imgMovie =
+          "https://image.tmdb.org/t/p/w500/" + dataMovie.poster_path;
+        headerSection.style.background = `url(${imgMovie})`;
+
+        const categoriesMovie = dataMovie.genres;
+
+        movieDetailCategoriesList.innerHTML = " ";
+
+        categoriesMovie.forEach((category) => {
+          const category_container = document.createElement("div");
+          category_container.classList.add("category_container");
+
+          const category_title = document.createElement("h3");
+          category_title.setAttribute("id", "id" + category.id);
+          category_title.classList.add("category-title");
+          category_title.innerText = category.name;
+          category_title.addEventListener("click", () => {
+            location.hash = `#category=${category.id}-${category.name}`;
+          });
+
+          category_container.appendChild(category_title);
+          movieDetailCategoriesList.appendChild(category_container);
+        });
+      });
 
       const imageMovie = document.createElement("img");
       imageMovie.classList.add("movie-img");
@@ -177,13 +261,38 @@ async function getTrendingMovies() {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
-    movie_container.addEventListener("click", () => {
-      location.hash = "#movie=" + movie.id;
-      movieDetailTitle.innerText = movie.title;
-      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
-      movieDetailDescription.innerText = movie.overview;
-      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+    movie_container.addEventListener("click", async () => {
+      const { data: dataMovie } = await api("movie/" + movie.id);
+
+      location.hash = "#movie=" + dataMovie.id;
+      movieDetailTitle.innerText = dataMovie.title;
+      movieDetailScore.innerText = parseFloat(dataMovie.vote_average).toFixed(
+        2
+      );
+      movieDetailDescription.innerText = dataMovie.overview;
+      const imgMovie =
+        "https://image.tmdb.org/t/p/w500/" + dataMovie.poster_path;
       headerSection.style.background = `url(${imgMovie})`;
+
+      const categoriesMovie = dataMovie.genres;
+
+      movieDetailCategoriesList.innerHTML = " ";
+
+      categoriesMovie.forEach((category) => {
+        const category_container = document.createElement("div");
+        category_container.classList.add("category_container");
+
+        const category_title = document.createElement("h3");
+        category_title.setAttribute("id", "id" + category.id);
+        category_title.classList.add("category-title");
+        category_title.innerText = category.name;
+        category_title.addEventListener("click", () => {
+          location.hash = `#category=${category.id}-${category.name}`;
+        });
+
+        category_container.appendChild(category_title);
+        movieDetailCategoriesList.appendChild(category_container);
+      });
     });
 
     const imageMovie = document.createElement("img");
@@ -195,5 +304,3 @@ async function getTrendingMovies() {
     genericSection.appendChild(movie_container);
   });
 }
-
-async function getMovieById(id) {}
