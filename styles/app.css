@@ -134,12 +134,12 @@ footer {
 
 .header-container--long {
   background-image: url("https://pics.filmaffinity.com/Deadpool-777527803-large.jpg");
-  background: linear-gradient(
+  /*background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.35) 19.27%,
       rgba(0, 0, 0, 0) 29.17%
     ),
-    url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);
+    url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);*/
   background-size: cover !important;
   height: 480px;
   position: fixed;
@@ -402,6 +402,7 @@ footer {
   align-items: center;
   position: relative;
   bottom: 0px;
+  text-align: center;
 }
 
 /* Navigation */

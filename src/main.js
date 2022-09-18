@@ -29,6 +29,15 @@ async function getTrendingMoviesPreview() {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movie.id;
+      movieDetailTitle.innerText = movie.title;
+      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
+      movieDetailDescription.innerText = movie.overview;
+      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+      headerSection.style.background = `url(${imgMovie})`;
+    });
+
     const imageMovie = document.createElement("img");
     imageMovie.classList.add("movie-img");
     imageMovie.alt = movie.title;
@@ -94,6 +103,15 @@ async function getMoviesByCategory(idCtg, nameCtg) {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movie.id;
+      movieDetailTitle.innerText = movie.title;
+      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
+      movieDetailDescription.innerText = movie.overview;
+      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+      headerSection.style.background = `url(${imgMovie})`;
+    });
+
     const imageMovie = document.createElement("img");
     imageMovie.classList.add("movie-img");
     imageMovie.alt = movie.title;
@@ -124,8 +142,12 @@ async function getMoviesBySearch(query) {
       const imageMovie = document.createElement("img");
       imageMovie.classList.add("movie-img");
       imageMovie.alt = movie.title;
-      imageMovie.src = "https://image.tmdb.org/t/p/w300/" + movie.poster_path;
-
+      if (movie.poster_path) {
+        imageMovie.src = "https://image.tmdb.org/t/p/w300/" + movie.poster_path;
+      } else {
+        imageMovie.src =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/First_stellation_of_dodecahedron.svg/1024px-First_stellation_of_dodecahedron.svg.png";
+      }
       movie_container.appendChild(imageMovie);
       genericSection.appendChild(movie_container);
     });
@@ -139,3 +161,39 @@ async function getMoviesBySearch(query) {
     genericSection.appendChild(anuncio);
   }
 }
+
+async function getTrendingMovies() {
+  const { data } = await api("trending/movie/day");
+
+  const movies = data.results;
+
+  const trendingPreview_movieList = document.querySelector(
+    ".trendingPreview-movieList"
+  );
+
+  genericSection.innerHTML = "";
+
+  movies.forEach((movie) => {
+    const movie_container = document.createElement("div");
+    movie_container.classList.add("movie-container");
+
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movie.id;
+      movieDetailTitle.innerText = movie.title;
+      movieDetailScore.innerText = parseFloat(movie.vote_average).toFixed(2);
+      movieDetailDescription.innerText = movie.overview;
+      const imgMovie = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+      headerSection.style.background = `url(${imgMovie})`;
+    });
+
+    const imageMovie = document.createElement("img");
+    imageMovie.classList.add("movie-img");
+    imageMovie.alt = movie.title;
+    imageMovie.src = "https://image.tmdb.org/t/p/w300/" + movie.poster_path;
+
+    movie_container.appendChild(imageMovie);
+    genericSection.appendChild(movie_container);
+  });
+}
+
+async function getMovieById(id) {}

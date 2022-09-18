@@ -35,3 +35,5 @@ const movieDetailDescription = document.querySelector(
   ".movieDetail-description"
 );
 const movieDetailScore = document.querySelector(".movieDetail-score");
+
+const text_footer = document.getElementById("text-footer");
