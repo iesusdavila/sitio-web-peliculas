@@ -29,7 +29,7 @@ async function getTrendingMoviesPreview() {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
-    movie_container.addEventListener("click", async () => {
+    /*movie_container.addEventListener("click", async () => {
       const { data: dataMovie } = await api("movie/" + movie.id);
 
       console.log(dataMovie);
@@ -63,6 +63,9 @@ async function getTrendingMoviesPreview() {
         category_container.appendChild(category_title);
         movieDetailCategoriesList.appendChild(category_container);
       });
+    });*/
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movie.id;
     });
 
     const imageMovie = document.createElement("img");
@@ -130,7 +133,7 @@ async function getMoviesByCategory(idCtg, nameCtg) {
     const movie_container = document.createElement("div");
     movie_container.classList.add("movie-container");
 
-    movie_container.addEventListener("click", async () => {
+    /*movie_container.addEventListener("click", async () => {
       const { data: dataMovie } = await api("movie/" + movie.id);
 
       location.hash = "#movie=" + dataMovie.id;
@@ -162,6 +165,9 @@ async function getMoviesByCategory(idCtg, nameCtg) {
         category_container.appendChild(category_title);
         movieDetailCategoriesList.appendChild(category_container);
       });
+    });*/
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movie.id;
     });
 
     const imageMovie = document.createElement("img");
@@ -191,7 +197,7 @@ async function getMoviesBySearch(query) {
       const movie_container = document.createElement("div");
       movie_container.classList.add("movie-container");
 
-      movie_container.addEventListener("click", async () => {
+      /*movie_container.addEventListener("click", async () => {
         const { data: dataMovie } = await api("movie/" + movie.id);
 
         location.hash = "#movie=" + dataMovie.id;
@@ -223,6 +229,9 @@ async function getMoviesBySearch(query) {
           category_container.appendChild(category_title);
           movieDetailCategoriesList.appendChild(category_container);
         });
+      });*/
+      movie_container.addEventListener("click", () => {
+        location.hash = "#movie=" + movie.id;
       });
 
       const imageMovie = document.createElement("img");
