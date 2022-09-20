@@ -319,7 +319,7 @@ async function getTrendingMovies() {
   });
 }
 
-async function setInterfazMovieDetails(id) {
+async function getMovieById(id) {
   const { data: dataMovie } = await api("movie/" + id);
 
   //location.hash = "#movie=" + dataMovie.id;
@@ -347,5 +347,29 @@ async function setInterfazMovieDetails(id) {
 
     category_container.appendChild(category_title);
     movieDetailCategoriesList.appendChild(category_container);
+  });
+}
+
+async function getRelatedMoviesById(id) {
+  const { data } = await api(`movie/${id}/recommendations`);
+  const relatedMovies = data.results;
+
+  relatedMoviesContainer.innerHTML = "";
+
+  relatedMovies.forEach((movieRecom) => {
+    const movie_container = document.createElement("div");
+    movie_container.classList.add("movie-container");
+    movie_container.addEventListener("click", () => {
+      location.hash = "#movie=" + movieRecom.id;
+    });
+
+    const imageMovie = document.createElement("img");
+    imageMovie.classList.add("movie-img");
+    imageMovie.alt = movieRecom.title;
+    imageMovie.src =
+      "https://image.tmdb.org/t/p/w300/" + movieRecom.poster_path;
+
+    movie_container.appendChild(imageMovie);
+    relatedMoviesContainer.appendChild(movie_container);
   });
 }
