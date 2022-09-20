@@ -11,7 +11,6 @@ const api = axios.create({
 
 const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach((entry) => {
-    console.log(observer);
     if (entry.isIntersecting) {
       const urlImg = entry.target.getAttribute("data-image");
       entry.target.setAttribute("src", urlImg);
@@ -252,8 +251,10 @@ async function getMoviesBySearch(query) {
 
 async function getTrendingMovies() {
   const { data } = await api("trending/movie/day");
-
   const movies = data.results;
+
+  pageMax = data.total_pages;
+  console.log(pageMax);
 
   const trendingPreview_movieList = document.querySelector(
     ".trendingPreview-movieList"
@@ -281,6 +282,44 @@ async function getTrendingMovies() {
     movie_container.appendChild(imageMovie);
     genericSection.appendChild(movie_container);
   });
+}
+
+async function getPaginatedTrendingMovies() {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  const scrollIsBottom = scrollTop + clientHeight >= scrollHeight - 15;
+
+  if (scrollIsBottom && page < pageMax) {
+    page++;
+    const { data } = await api("trending/movie/day", {
+      params: {
+        page,
+      },
+    });
+    const movies = data.results;
+
+    movies.forEach((movie) => {
+      const movie_container = document.createElement("div");
+      movie_container.classList.add("movie-container");
+      movie_container.addEventListener("click", () => {
+        location.hash = "#movie=" + movie.id;
+      });
+
+      const imageMovie = document.createElement("img");
+      imageMovie.classList.add("movie-img");
+      imageMovie.alt = movie.title;
+      imageMovie.setAttribute(
+        "data-image",
+        "https://image.tmdb.org/t/p/w300/" + movie.poster_path
+      );
+
+      observer.observe(imageMovie);
+
+      movie_container.appendChild(imageMovie);
+      genericSection.appendChild(movie_container);
+    });
+    //createMovies(movies, genericSection, { lazyLoad: true, clean: false });
+  }
 }
 
 async function getMovieById(id) {
