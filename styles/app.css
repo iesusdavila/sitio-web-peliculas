@@ -135,6 +135,16 @@ footer {
 
 .movie-img {
   border-radius: 8px;
+  min-height: 225px;
+}
+
+.movie-img--default {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  background: cadetblue;
 }
 
 .categoriesPreview-list,
